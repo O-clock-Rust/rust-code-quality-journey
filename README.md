@@ -1,4 +1,4 @@
-# Générateur de mots de passe en Rust - Projet éducatif - Étape 3
+# Générateur de mots de passe en Rust - Projet éducatif - Étape 4
 
 ## Introduction
 
@@ -19,59 +19,73 @@ Ce projet est organisé en plusieurs branches Git, chacune représentant une ét
 
 Chaque branche construit sur la précédente, ajoutant de nouvelles fonctionnalités ou améliorations.
 
-## Étape 3 : Gestion des erreurs
+## Étape 4 : Documentation complète
 
-Vous êtes actuellement sur la branche `etape3-gestion-erreurs`, qui représente la troisième étape de développement de notre projet : l'implémentation de la gestion des erreurs avec `anyhow`.
+Vous êtes actuellement sur la branche `etape4-documentation`, qui représente la quatrième étape de développement de notre projet : l'ajout d'une documentation complète.
 
 ### Objectifs de cette étape
 
-1. Intégrer la bibliothèque `anyhow` pour une gestion des erreurs plus robuste et flexible
-2. Remplacer les types d'erreur personnalisés par des erreurs `anyhow`
-3. Améliorer la propagation des erreurs à travers les différentes couches de l'application
-4. Fournir des messages d'erreur plus informatifs et utiles pour les utilisateurs
+1. Ajouter des commentaires de documentation détaillés pour toutes les structures, fonctions et méthodes
+2. Inclure des exemples de code dans la documentation
+3. Utiliser `cargo test` pour vérifier les exemples de code dans la documentation
+4. Générer une documentation HTML avec `cargo doc`
+5. Améliorer la lisibilité et la compréhension du code pour les futurs développeurs et utilisateurs
 
 ### Points clés
 
-- Utiliser `anyhow::Result` pour simplifier la gestion des erreurs
-- Créer des erreurs personnalisées avec des contextes clairs et informatifs
-- Propager les erreurs de manière cohérente à travers l'application
-- Assurer que les messages d'erreur sont utiles pour le débogage et compréhensibles pour l'utilisateur final
-- Maintenir un équilibre entre la gestion détaillée des erreurs et la simplicité du code
+- Écrire des commentaires de documentation clairs et concis
+- Utiliser les balises Rust doc appropriées (`//!` pour la documentation de module, `///` pour les items)
+- Inclure des exemples pertinents et testables dans la documentation
+- Expliquer le "pourquoi" en plus du "comment" dans les commentaires
+- Utiliser des liens vers d'autres parties de la documentation quand c'est pertinent
+- Éviter la sur-documentation des éléments évidents
+- Assurer que la documentation est à jour avec le code
 
 ### Contenu clé
 
-- `src/lib.rs` : Implémentation de la gestion des erreurs dans la bibliothèque
-- `src/main.rs` : Gestion des erreurs dans l'interface en ligne de commande
-- `Cargo.toml` : Ajout de la dépendance `anyhow`
+- `src/lib.rs` : Documentation complète de la bibliothèque
+- `src/main.rs` : Documentation de l'interface en ligne de commande
+- `README.md` : Mise à jour avec des informations sur la documentation
 
 ### Fonctionnalités ajoutées
 
-- Utilisation de `anyhow::Result` pour les fonctions retournant des résultats
-- Messages d'erreur contextuels et plus détaillés
-- Meilleure gestion des cas d'erreur dans l'interface CLI
+- Documentation détaillée pour chaque fonction, méthode et structure
+- Exemples de code testables dans la documentation
+- Documentation de module expliquant l'architecture globale
 
 ### Comment utiliser
 
-1. Clonez le dépôt et assurez-vous d'être sur la branche `etape3-gestion-erreurs`
-2. Compilez le projet :
+1. Clonez le dépôt et assurez-vous d'être sur la branche `etape4-documentation`
+2. Générez et ouvrez la documentation :
    ```
-   cargo build
+   cargo doc --open
    ```
-3. Exécutez le programme :
+3. Exécutez les tests, y compris ceux dans la documentation :
+   ```
+   cargo test
+   ```
+4. Pour utiliser le programme :
    ```
    cargo run -- --length 12
    ```
-4. Pour voir la gestion des erreurs en action, essayez des cas d'erreur, par exemple :
-   ```
-   cargo run -- --length 0
-   ```
+
+### Vérification de la documentation
+
+- Pour vérifier que les exemples de code dans la documentation fonctionnent :
+  ```
+  cargo test --doc
+  ```
+- Pour générer la documentation sans l'ouvrir automatiquement :
+  ```
+  cargo doc
+  ```
 
 ### Prochaines étapes
 
-Pour voir l'ajout de la documentation complète, passez à la branche `etape4-documentation` :
+Pour voir l'implémentation des tests unitaires et d'intégration, passez à la branche `etape5-tests` :
 
 ```
-git checkout etape4-documentation
+git checkout etape5-tests
 ```
 
 ## Contribution
