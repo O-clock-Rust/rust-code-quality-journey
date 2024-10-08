@@ -6,9 +6,11 @@ author = "André LECLERCQ pour Oclock"
 
 [dependencies]
 anyhow = "1.0.89"
+assert_cmd = "2.0.16"
 clap = "4.5.19"
 env_logger = "0.11.5"
 log = "0.4.22"
+predicates = "3.1.2"
 rand = "0.8.5"
 
 [lib]

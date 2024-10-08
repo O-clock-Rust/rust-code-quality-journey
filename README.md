@@ -1,4 +1,4 @@
-# Générateur de mots de passe en Rust - Projet éducatif - Étape 4
+# Générateur de mots de passe en Rust - Projet éducatif - Étape 5
 
 ## Introduction
 
@@ -19,73 +19,81 @@ Ce projet est organisé en plusieurs branches Git, chacune représentant une ét
 
 Chaque branche construit sur la précédente, ajoutant de nouvelles fonctionnalités ou améliorations.
 
-## Étape 4 : Documentation complète
+## Étape 5 : Tests unitaires et d'intégration
 
-Vous êtes actuellement sur la branche `etape4-documentation`, qui représente la quatrième étape de développement de notre projet : l'ajout d'une documentation complète.
+Vous êtes actuellement sur la branche `etape5-tests`, qui représente la cinquième et dernière étape de développement de notre projet : l'implémentation des tests unitaires et d'intégration.
 
 ### Objectifs de cette étape
 
-1. Ajouter des commentaires de documentation détaillés pour toutes les structures, fonctions et méthodes
-2. Inclure des exemples de code dans la documentation
-3. Utiliser `cargo test` pour vérifier les exemples de code dans la documentation
-4. Générer une documentation HTML avec `cargo doc`
-5. Améliorer la lisibilité et la compréhension du code pour les futurs développeurs et utilisateurs
+1. Implémenter des tests unitaires pour les fonctions individuelles de la bibliothèque
+2. Créer des tests d'intégration pour vérifier le fonctionnement de l'application dans son ensemble
+3. Assurer une couverture de test adéquate pour le projet
+4. Démontrer l'utilisation de différentes techniques de test en Rust
 
 ### Points clés
 
-- Écrire des commentaires de documentation clairs et concis
-- Utiliser les balises Rust doc appropriées (`//!` pour la documentation de module, `///` pour les items)
-- Inclure des exemples pertinents et testables dans la documentation
-- Expliquer le "pourquoi" en plus du "comment" dans les commentaires
-- Utiliser des liens vers d'autres parties de la documentation quand c'est pertinent
-- Éviter la sur-documentation des éléments évidents
-- Assurer que la documentation est à jour avec le code
+- Rester simple et efficace dans l'écriture des tests
+- Distinguer clairement les tests unitaires des tests d'intégration :
+  - Tests unitaires : se concentrent sur des fonctions ou méthodes individuelles
+  - Tests d'intégration : vérifient le fonctionnement de plusieurs composants ensemble
+- Écrire des tests lisibles et maintenables
+- Utiliser des noms de tests descriptifs qui expliquent ce qui est testé
+- Éviter la duplication de code dans les tests en utilisant des helpers ou des macros si nécessaire
+- Tester les cas normaux et les cas limites
+- Utiliser les fonctionnalités de test de Rust comme `#[test]`, `#[should_panic]`, etc.
 
 ### Contenu clé
 
-- `src/lib.rs` : Documentation complète de la bibliothèque
-- `src/main.rs` : Documentation de l'interface en ligne de commande
-- `README.md` : Mise à jour avec des informations sur la documentation
+- `src/lib.rs` : Tests unitaires pour la bibliothèque
+- `tests/` : Dossier contenant les tests d'intégration
+- `tests/cli.rs` : Tests d'intégration pour l'interface en ligne de commande
 
 ### Fonctionnalités ajoutées
 
-- Documentation détaillée pour chaque fonction, méthode et structure
-- Exemples de code testables dans la documentation
-- Documentation de module expliquant l'architecture globale
+- Tests unitaires pour chaque fonction principale de la bibliothèque
+- Tests d'intégration pour vérifier le comportement de l'application CLI
+- Utilisation de `assert_cmd` et `predicates` pour les tests d'intégration CLI
 
 ### Comment utiliser
 
-1. Clonez le dépôt et assurez-vous d'être sur la branche `etape4-documentation`
-2. Générez et ouvrez la documentation :
-   ```
-   cargo doc --open
-   ```
-3. Exécutez les tests, y compris ceux dans la documentation :
+1. Clonez le dépôt et assurez-vous d'être sur la branche `etape5-tests`
+2. Exécutez tous les tests :
    ```
    cargo test
    ```
-4. Pour utiliser le programme :
+3. Pour exécuter uniquement les tests unitaires :
    ```
-   cargo run -- --length 12
+   cargo test --lib
+   ```
+4. Pour exécuter uniquement les tests d'intégration :
+   ```
+   cargo test --test '*'
    ```
 
-### Vérification de la documentation
+### Exemple de test unitaire
 
-- Pour vérifier que les exemples de code dans la documentation fonctionnent :
-  ```
-  cargo test --doc
-  ```
-- Pour générer la documentation sans l'ouvrir automatiquement :
-  ```
-  cargo doc
-  ```
-
-### Prochaines étapes
-
-Pour voir l'implémentation des tests unitaires et d'intégration, passez à la branche `etape5-tests` :
-
+```rust
+#[test]
+fn test_password_length() {
+    let generator = PasswordGenerator::new(10).unwrap();
+    let password = generator.generate().unwrap();
+    assert_eq!(password.len(), 10);
+}
 ```
-git checkout etape5-tests
+
+### Exemple de test d'intégration
+
+```rust
+#[test]
+fn test_cli_generate_password() {
+    Command::cargo_bin("password-generator-cli")
+        .unwrap()
+        .arg("--length")
+        .arg("12")
+        .assert()
+        .success()
+        .stdout(predicate::str::contains("Generated password:"));
+}
 ```
 
 ## Contribution

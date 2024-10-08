@@ -1,3 +1,5 @@
+// AJOUT DES TESTS UNITAIRES
+
 //! A password generator library.
 //!
 //! This library provides functionality to generate secure passwords
@@ -193,4 +195,68 @@ impl PasswordGenerator {
 pub fn generate_password(length: usize) -> Result<String> {
     info!("Generating password with default settings, length {}", length);
     PasswordGenerator::new(length)?.generate()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_password_generator_new() {
+        // Test successful creation with a valid length
+        assert!(PasswordGenerator::new(10).is_ok());
+        // Test creation failure with a length of 0
+        assert!(PasswordGenerator::new(0).is_err());
+    }
+
+    #[test]
+    fn test_password_generator_length() {
+        // Verify that the generated password has the specified length
+        let generator = PasswordGenerator::new(15).unwrap();
+        let password = generator.generate().unwrap();
+        assert_eq!(password.len(), 15);
+    }
+
+    #[test]
+    fn test_password_generator_charset() {
+        // Check that only characters from the specified set are used
+        let generator = PasswordGenerator::new(100)
+            .unwrap()
+            .with_uppercase(true)
+            .with_lowercase(false)
+            .with_numbers(false)
+            .with_symbols(false);
+        let password = generator.generate().unwrap();
+        assert!(password.chars().all(|c| c.is_ascii_uppercase()));
+    }
+
+    #[test]
+    fn test_password_generator_all_charsets() {
+        // Ensure all character types are present when all sets are enabled
+        let generator = PasswordGenerator::new(1000).unwrap();
+        let password = generator.generate().unwrap();
+        assert!(password.chars().any(|c| c.is_ascii_uppercase()));
+        assert!(password.chars().any(|c| c.is_ascii_lowercase()));
+        assert!(password.chars().any(|c| c.is_ascii_digit()));
+        assert!(password.chars().any(|c| "!@#$%^&*()_+-=[]{}|;:,.<>?".contains(c)));
+    }
+
+    #[test]
+    fn test_password_generator_no_charset() {
+        // Verify that generation fails if no character set is selected
+        let generator = PasswordGenerator::new(10)
+            .unwrap()
+            .with_uppercase(false)
+            .with_lowercase(false)
+            .with_numbers(false)
+            .with_symbols(false);
+        assert!(generator.generate().is_err());
+    }
+
+    #[test]
+    fn test_generate_password_function() {
+        // Test the convenience function generate_password
+        let password = generate_password(20).unwrap();
+        assert_eq!(password.len(), 20);
+    }
 }
