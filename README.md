@@ -1,8 +1,8 @@
-# Générateur de mots de passe en Rust - Projet éducatif - Étape 1
+# Générateur de mots de passe en Rust - Projet éducatif - Étape 2
 
 ## Introduction
 
-Bienvenue dans ce projet éducatif de générateur de mots de passe en Rust ! Ce projet a pour but de démontrer les étapes de création d'un code propre, bien structuré et testé, en utilisant Rust comme langage de programmation.
+Bienvenue dans ce projet éducatif de générateur de mots de passe en Rust ! Ce projet démontre les étapes de création d'un code propre, bien structuré et testé, en utilisant Rust comme langage de programmation.
 
 Le projet consiste en une bibliothèque de génération de mots de passe et une interface en ligne de commande (CLI) pour l'utiliser. À travers ce projet, nous explorerons les meilleures pratiques de développement, de la conception initiale aux tests approfondis.
 
@@ -19,62 +19,56 @@ Ce projet est organisé en plusieurs branches Git, chacune représentant une ét
 
 Chaque branche construit sur la précédente, ajoutant de nouvelles fonctionnalités ou améliorations.
 
-## Étape 1 : Implémentation de base
+## Étape 2 : Gestion des logs
 
-Vous êtes actuellement sur la branche `etape1-code-fonctionnel`, qui représente la première étape de développement de notre projet : l'implémentation de base.
+Vous êtes actuellement sur la branche `etape2-gestion-logs`, qui représente la deuxième étape de développement de notre projet : l'ajout de la gestion des logs.
 
 ### Objectifs de cette étape
 
-1. Créer la structure de base du projet Rust
-2. Implémenter les fonctionnalités fondamentales de la bibliothèque de génération de mots de passe
-3. Développer une interface en ligne de commande simple pour utiliser la bibliothèque
-4. Assurer que le code est fonctionnel et produit les résultats attendus
+1. Intégrer un système de logging dans la bibliothèque et l'application CLI
+2. Ajouter des logs pertinents pour suivre le flux d'exécution et faciliter le débogage
+3. Configurer différents niveaux de log (info, debug) pour différents contextes d'utilisation
+4. Améliorer la maintenabilité et la débuggabilité du code
 
 ### Points clés
 
-- Le code doit être simple et direct, sans complications inutiles.
-- Les fonctions doivent avoir une responsabilité unique et être faciles à comprendre.
-- L'interface de la bibliothèque doit être intuitive et facile à utiliser.
-- L'exécutable doit démontrer l'utilisation basique de la bibliothèque.
+- Les logs doivent être simples, concis et pertinents
+- Utiliser les logs de type 'info' pour les événements importants du flux principal
+- Utiliser les logs de type 'debug' pour les détails utiles lors du débogage
+- Éviter le logging excessif qui pourrait nuire aux performances
+- Configurer les logs pour qu'ils soient facilement activables/désactivables
 
 ### Contenu clé
 
-- `src/lib.rs` : Implémentation de la bibliothèque de génération de mots de passe
-- `src/main.rs` : Code de l'interface en ligne de commande
-- `Cargo.toml` : Configuration du projet et dépendances
+- `src/lib.rs` : Ajout de logs dans la bibliothèque de génération de mots de passe
+- `src/main.rs` : Intégration des logs dans l'interface en ligne de commande
+- `Cargo.toml` : Ajout des dépendances pour la gestion des logs (par exemple, `log` et `env_logger`)
 
-### Fonctionnalités implémentées
+### Fonctionnalités ajoutées
 
-- Génération de mots de passe aléatoires
-- Personnalisation de la longueur du mot de passe
-- Options pour inclure/exclure des types de caractères spécifiques
-- Interface CLI basique pour utiliser la bibliothèque
+- Logging des étapes clés de la génération de mots de passe
+- Logging des actions de l'utilisateur dans l'interface CLI
+- Configuration des niveaux de log via des variables d'environnement
 
 ### Comment utiliser
 
-1. Clonez le dépôt et assurez-vous d'être sur la branche `etape1-code-fonctionnel`
+1. Clonez le dépôt et assurez-vous d'être sur la branche `etape2-gestion-logs`
 2. Compilez le projet :
    ```
    cargo build
    ```
-3. Exécutez le programme :
+3. Exécutez le programme avec logging activé :
    ```
    cargo run -- --length 12
    ```
 
 ### Prochaines étapes
 
-Pour voir l'ajout de la gestion des logs, passez à la branche `etape2-gestion-logs` :
+Pour voir l'ajout de la gestion des erreurs, passez à la branche `etape3-gestion-erreurs` :
 
 ```
-git checkout etape2-gestion-logs
+git checkout etape3-gestion-erreurs
 ```
-
-## Comment utiliser ce projet
-
-1. Explorez chaque branche dans l'ordre pour voir l'évolution du projet.
-2. Lisez les README spécifiques à chaque étape pour comprendre les changements et les nouveaux concepts introduits.
-3. Examinez le code et les tests pour voir comment les meilleures pratiques sont appliquées.
 
 ## Contribution
 

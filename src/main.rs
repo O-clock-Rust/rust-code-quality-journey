@@ -1,7 +1,12 @@
 use clap::{Arg, Command};
+use env_logger::Env;
 use password_generator::PasswordGenerator;
+use log::debug;
 
 fn main() {
+    env_logger::Builder::from_env(Env::default().default_filter_or("debug")).init();
+    debug!("Starting password generator CLI");
+
     let matches = Command::new("Password Generator")
         .version("1.0")
         .author("Your Name")
@@ -32,7 +37,8 @@ fn main() {
         .get_matches();
 
     let length = *matches.get_one::<u8>("length").expect("Required");
-    
+
+    debug!("Creating PasswordGenerator with length {}", length);    
     let password = PasswordGenerator::new(length as usize)
         .with_uppercase(!matches.get_flag("no-uppercase"))
         .with_lowercase(!matches.get_flag("no-lowercase"))
@@ -41,4 +47,6 @@ fn main() {
         .generate();
 
     println!("Generated password: {}", password);
+    debug!("Password generation complete");
 }
+
