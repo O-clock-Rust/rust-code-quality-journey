@@ -80,6 +80,12 @@ Vous êtes actuellement sur la branche `etape4-documentation`, qui représente l
   cargo doc
   ```
 
+### Aperçu du rendu en HTML 
+
+![Documentation de la library](doc_lib.png)
+
+![Documentation de la CLI](doc_cli.png)
+
 ### Prochaines étapes
 
 Pour voir l'implémentation des tests unitaires et d'intégration, passez à la branche `etape5-tests` :
