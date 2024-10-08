@@ -1,4 +1,4 @@
-# Générateur de mots de passe en Rust - Projet éducatif - Étape 2
+# Générateur de mots de passe en Rust - Projet éducatif - Étape 3
 
 ## Introduction
 
@@ -19,55 +19,59 @@ Ce projet est organisé en plusieurs branches Git, chacune représentant une ét
 
 Chaque branche construit sur la précédente, ajoutant de nouvelles fonctionnalités ou améliorations.
 
-## Étape 2 : Gestion des logs
+## Étape 3 : Gestion des erreurs
 
-Vous êtes actuellement sur la branche `etape2-gestion-logs`, qui représente la deuxième étape de développement de notre projet : l'ajout de la gestion des logs.
+Vous êtes actuellement sur la branche `etape3-gestion-erreurs`, qui représente la troisième étape de développement de notre projet : l'implémentation de la gestion des erreurs avec `anyhow`.
 
 ### Objectifs de cette étape
 
-1. Intégrer un système de logging dans la bibliothèque et l'application CLI
-2. Ajouter des logs pertinents pour suivre le flux d'exécution et faciliter le débogage
-3. Configurer différents niveaux de log (info, debug) pour différents contextes d'utilisation
-4. Améliorer la maintenabilité et la débuggabilité du code
+1. Intégrer la bibliothèque `anyhow` pour une gestion des erreurs plus robuste et flexible
+2. Remplacer les types d'erreur personnalisés par des erreurs `anyhow`
+3. Améliorer la propagation des erreurs à travers les différentes couches de l'application
+4. Fournir des messages d'erreur plus informatifs et utiles pour les utilisateurs
 
 ### Points clés
 
-- Les logs doivent être simples, concis et pertinents
-- Utiliser les logs de type 'info' pour les événements importants du flux principal
-- Utiliser les logs de type 'debug' pour les détails utiles lors du débogage
-- Éviter le logging excessif qui pourrait nuire aux performances
-- Configurer les logs pour qu'ils soient facilement activables/désactivables
+- Utiliser `anyhow::Result` pour simplifier la gestion des erreurs
+- Créer des erreurs personnalisées avec des contextes clairs et informatifs
+- Propager les erreurs de manière cohérente à travers l'application
+- Assurer que les messages d'erreur sont utiles pour le débogage et compréhensibles pour l'utilisateur final
+- Maintenir un équilibre entre la gestion détaillée des erreurs et la simplicité du code
 
 ### Contenu clé
 
-- `src/lib.rs` : Ajout de logs dans la bibliothèque de génération de mots de passe
-- `src/main.rs` : Intégration des logs dans l'interface en ligne de commande
-- `Cargo.toml` : Ajout des dépendances pour la gestion des logs (par exemple, `log` et `env_logger`)
+- `src/lib.rs` : Implémentation de la gestion des erreurs dans la bibliothèque
+- `src/main.rs` : Gestion des erreurs dans l'interface en ligne de commande
+- `Cargo.toml` : Ajout de la dépendance `anyhow`
 
 ### Fonctionnalités ajoutées
 
-- Logging des étapes clés de la génération de mots de passe
-- Logging des actions de l'utilisateur dans l'interface CLI
-- Configuration des niveaux de log via des variables d'environnement
+- Utilisation de `anyhow::Result` pour les fonctions retournant des résultats
+- Messages d'erreur contextuels et plus détaillés
+- Meilleure gestion des cas d'erreur dans l'interface CLI
 
 ### Comment utiliser
 
-1. Clonez le dépôt et assurez-vous d'être sur la branche `etape2-gestion-logs`
+1. Clonez le dépôt et assurez-vous d'être sur la branche `etape3-gestion-erreurs`
 2. Compilez le projet :
    ```
    cargo build
    ```
-3. Exécutez le programme avec logging activé :
+3. Exécutez le programme :
    ```
    cargo run -- --length 12
+   ```
+4. Pour voir la gestion des erreurs en action, essayez des cas d'erreur, par exemple :
+   ```
+   cargo run -- --length 0
    ```
 
 ### Prochaines étapes
 
-Pour voir l'ajout de la gestion des erreurs, passez à la branche `etape3-gestion-erreurs` :
+Pour voir l'ajout de la documentation complète, passez à la branche `etape4-documentation` :
 
 ```
-git checkout etape3-gestion-erreurs
+git checkout etape4-documentation
 ```
 
 ## Contribution

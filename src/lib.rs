@@ -1,5 +1,6 @@
 use rand::Rng;
-use log::{info, debug};
+use log::{info, debug, warn};
+use anyhow::{Result, anyhow};
 
 pub struct PasswordGenerator {
     length: usize,
@@ -10,15 +11,19 @@ pub struct PasswordGenerator {
 }
 
 impl PasswordGenerator {
-    pub fn new(length: usize) -> Self {
+    pub fn new(length: usize) -> Result<Self> {
+        if length == 0 {
+            warn!("Attempt to create PasswordGenerator with zero length");
+            return Err(anyhow!("Password length must be greater than 0"));
+        }
         info!("Creating new PasswordGenerator with length {}", length);
-        PasswordGenerator {
+        Ok(PasswordGenerator {
             length,
             use_uppercase: true,
             use_lowercase: true,
             use_numbers: true,
             use_symbols: true,
-        }
+        })
     }
 
     pub fn with_uppercase(mut self, use_uppercase: bool) -> Self {
@@ -45,7 +50,7 @@ impl PasswordGenerator {
         self
     }
 
-    pub fn generate(&self) -> String {
+    pub fn generate(&self) -> Result<String> {
         info!("Generating password with length {}", self.length);
         let mut rng = rand::thread_rng();
         let mut charset = String::new();
@@ -68,10 +73,9 @@ impl PasswordGenerator {
         }
 
         debug!("Charset length: {}", charset.len());
-
         if charset.is_empty() {
-            info!("Empty charset, returning empty string");
-            return String::new();
+            warn!("Empty charset, cannot generate password");
+            return Err(anyhow!("No character set selected for password generation"));
         }
 
         let password: String = (0..self.length)
@@ -82,7 +86,11 @@ impl PasswordGenerator {
             .collect();
 
         debug!("Password generated successfully");
-        password
+        Ok(password)
     }
 }
 
+pub fn generate_password(length: usize) -> Result<String> {
+    info!("Generating password with default settings, length {}", length);
+    PasswordGenerator::new(length)?.generate()
+}

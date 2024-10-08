@@ -2,8 +2,9 @@ use clap::{Arg, Command};
 use env_logger::Env;
 use password_generator::PasswordGenerator;
 use log::debug;
+use anyhow::{Result, Context};
 
-fn main() {
+fn main() -> Result<()> {
     env_logger::Builder::from_env(Env::default().default_filter_or("debug")).init();
     debug!("Starting password generator CLI");
 
@@ -36,17 +37,20 @@ fn main() {
             .action(clap::ArgAction::SetTrue))
         .get_matches();
 
-    let length = *matches.get_one::<u8>("length").expect("Required");
-
+    let length = *matches.get_one::<u8>("length").context("Failed to get length")?;
     debug!("Creating PasswordGenerator with length {}", length);    
+
     let password = PasswordGenerator::new(length as usize)
+        .context("Failed to create PasswordGenerator")?
         .with_uppercase(!matches.get_flag("no-uppercase"))
         .with_lowercase(!matches.get_flag("no-lowercase"))
         .with_numbers(!matches.get_flag("no-numbers"))
         .with_symbols(!matches.get_flag("no-symbols"))
-        .generate();
+        .generate()
+        .context("Failed to generate password")?;
 
     println!("Generated password: {}", password);
     debug!("Password generation complete");
-}
 
+    Ok(())
+}
