@@ -5,3 +5,13 @@ edition = "2021"
 author = "André LECLERCQ pour Oclock"
 
 [dependencies]
+clap = "4.5.19"
+rand = "0.8.5"
+
+[lib]
+name = "password_generator"
+path = "src/lib.rs"
+
+[[bin]]
+name = "password_generator_cli"
+path = "src/main.rs"

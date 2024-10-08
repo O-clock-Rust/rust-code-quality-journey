@@ -1,4 +1,4 @@
-# Générateur de mots de passe en Rust - Projet éducatif
+# Générateur de mots de passe en Rust - Projet éducatif - Étape 1
 
 ## Introduction
 
@@ -19,27 +19,55 @@ Ce projet est organisé en plusieurs branches Git, chacune représentant une ét
 
 Chaque branche construit sur la précédente, ajoutant de nouvelles fonctionnalités ou améliorations.
 
-## Étape 0 : Conception du projet
+## Étape 1 : Implémentation de base
 
-Vous êtes actuellement sur la branche `main`, qui représente l'étape 0 de notre projet : la phase de conception.
+Vous êtes actuellement sur la branche `etape1-code-fonctionnel`, qui représente la première étape de développement de notre projet : l'implémentation de base.
 
 ### Objectifs de cette étape
 
-1. Définir la structure globale du projet
-2. Identifier les principales fonctionnalités
-3. Planifier l'architecture de la bibliothèque et de la CLI
-4. Établir les lignes directrices pour le développement
+1. Créer la structure de base du projet Rust
+2. Implémenter les fonctionnalités fondamentales de la bibliothèque de génération de mots de passe
+3. Développer une interface en ligne de commande simple pour utiliser la bibliothèque
+4. Assurer que le code est fonctionnel et produit les résultats attendus
 
-### Documents clés
+### Points clés
 
-- [CONCEPTION.md](CONCEPTION.md) : Ce document détaille l'architecture, les fonctionnalités, et les considérations techniques du projet.
+- Le code doit être simple et direct, sans complications inutiles.
+- Les fonctions doivent avoir une responsabilité unique et être faciles à comprendre.
+- L'interface de la bibliothèque doit être intuitive et facile à utiliser.
+- L'exécutable doit démontrer l'utilisation basique de la bibliothèque.
+
+### Contenu clé
+
+- `src/lib.rs` : Implémentation de la bibliothèque de génération de mots de passe
+- `src/main.rs` : Code de l'interface en ligne de commande
+- `Cargo.toml` : Configuration du projet et dépendances
+
+### Fonctionnalités implémentées
+
+- Génération de mots de passe aléatoires
+- Personnalisation de la longueur du mot de passe
+- Options pour inclure/exclure des types de caractères spécifiques
+- Interface CLI basique pour utiliser la bibliothèque
+
+### Comment utiliser
+
+1. Clonez le dépôt et assurez-vous d'être sur la branche `etape1-code-fonctionnel`
+2. Compilez le projet :
+   ```
+   cargo build
+   ```
+3. Exécutez le programme :
+   ```
+   cargo run -- --length 12
+   ```
 
 ### Prochaines étapes
 
-Pour commencer le développement et voir l'implémentation de base, passez à la branche `etape1-code-fonctionnel` :
+Pour voir l'ajout de la gestion des logs, passez à la branche `etape2-gestion-logs` :
 
 ```
-git checkout etape1-code-fonctionnel
+git checkout etape2-gestion-logs
 ```
 
 ## Comment utiliser ce projet
